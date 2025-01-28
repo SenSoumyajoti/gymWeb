@@ -1,7 +1,15 @@
-import {React,useState} from "react";
+import React,{useState} from "react";
 import '../styles/join.css'
+import Dropdown from "../components/Dropdown";
 
 export default function Join() {
+
+  const option=[
+    {value:'option1', label:'option1'},
+    {value:'option2', label:'option2'},
+    {value:'option3', label:'option3'}
+  ]
+
 
     const [formdata,setFormdata]=useState({
         name:'',
@@ -15,13 +23,12 @@ export default function Join() {
       })
     }
     const handlesubmit= async (e)=>{
+      e.preventDefault();
       try{
-
-      
-      const response=await fetch("http://localhost:5000/join",{
-        method:"POST",
+      const response=await fetch('http://localhost:4000/app/join',{
+        method:'POST',
         headers:{
-          "Content-Type":"application/json",
+          'Content-Type':'application/json',
           },
           body:JSON.stringify(formdata),
       })
@@ -34,6 +41,7 @@ export default function Join() {
       }
     }catch(error){
       console.log("error",error.message);
+      alert("something went wrong!!")
       }
     }
    
@@ -45,17 +53,17 @@ export default function Join() {
       </div>
       <div className="submit-form">
         <form onSubmit={handlesubmit}>
-          <label for="name">Name</label>
-          <input type="text" id="name" placeholder="your name" value={formdata.name} onChange={handlechange} required/>
+          <label htmlFor="name">Name</label>
+          <input type="text" id="name" name="name" placeholder="your name" value={formdata.name} onChange={handlechange} required/>
 
-          <label for="number">Contact No</label>
-          <input type="number" id="number" placeholder="contact no" value={formdata.number} onChange={handlechange} required/>
+          <label htmlFor="number">Contact No</label>
+          <input type="number" id="number" name="number" placeholder="contact no" value={formdata.number} onChange={handlechange} required/>
 
-          <label for="email">Email</label>
-          <input type="email" id="email" placeholder="email" value={formdata.email} onChange={handlechange} required/>
+          <label htmlFor="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="email" value={formdata.email} onChange={handlechange} required/>
 
-          <label for="password ">Password</label>
-          <input type="password" id="password" placeholder="password" value={formdata.password} onChange={handlechange} required/>
+          <label htmlFor="password">Password</label>
+          <input type="password" id="password" name="password" placeholder="password" value={formdata.password} onChange={handlechange} required/>
   
           <input type="submit" value="submit"/>
         </form>
