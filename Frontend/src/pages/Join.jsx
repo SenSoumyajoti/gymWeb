@@ -19,7 +19,7 @@ export default function Join() {
     })
     const handlechange=(e)=>{
       setFormdata({...formdata,
-        [e.target.name]:e.target.value,
+        [e.target.id]:e.target.value,
       })
     }
     const handlesubmit= async (e)=>{
